@@ -1,0 +1,5 @@
+#!/bin/sh
+pgrep -fx "/usr/sbin/VBoxClient --clipboard" > /dev/null
+if [ $? -ne 0 ] ; then
+    /usr/sbin/VBoxClient --clipboard
+fi
