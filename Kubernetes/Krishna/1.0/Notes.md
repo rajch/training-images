@@ -1,4 +1,4 @@
-# Matsya VM version 1.0
+# Krishna VM version 1.0
 
 ## Specifications
 Debian version 9.9 with:
