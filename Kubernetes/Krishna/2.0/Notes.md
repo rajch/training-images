@@ -18,7 +18,7 @@ Debian 10.0 currently not used, as there seem to be some incompatibilities.Refer
 ## For debian base 9.9 
 ### Base Setup
 1. Download **debian-9.9.0-amd64-netinst.iso** (Debian "stable" release) from https://www.debian.org/CD/http-ftp/. 
-2. Create a virtual machine with at least 2 cores, 2GB RAM, 8GB video memory and 100GB hard disk. Mount the iso from step 1 on the CDROM device. Boot. From the installer, choose "Install".
+2. Create a virtual machine with at least 2 cores, 2GB RAM, 8MB video memory and 100GB hard disk. Mount the iso from step 1 on the CDROM device. Boot. From the installer, choose "Install".
 3. In the "Set up users and passwords" step, provide a password for the root user, and create a user with "Full Name": User 1 and username: user1.
 4. In the "Partition Disks" step, choose "Manual". Select the hard disk. Create a new, empty partition table on it. Select the "Free Space" on the hard disk. Create a new partition, using the maximum space available, type Primary. Set the Bootable flag to on. Finish partitioning and write the changes to disk. Confirm that you do not want swap space, and continue the installation.
 5. In the "Software Selection" step, choose _only_ "SSH server".
@@ -42,7 +42,10 @@ Debian 10.0 currently not used, as there seem to be some incompatibilities.Refer
 
 ### Docker and Kubernetes
 19. Edit **/etc/ssh/sshd_config**. Add the line `PermitRootLogin yes`. Run `systemctl restart ssh`. Copy the attached **root/rw-installscripts** directory to **/root/rw-installscripts**. Go to that directory and run `chmod +x *.sh`.
-20. Run `./base-setup.sh`.
+20. Run `./base-setup.sh` to install latest kubernetes and supported docker. Run `KUBE_VERSION=<version> ./base-setup.sh` to install earlier supported versions. Currently suppported versions are:
+    - 1.16.0-00
+    - 1.15.4-00
+    - 1.14.7-00
 21. Verify that docker is up by running `docker system info`. Verify that kubeadm is installed by running `kubeadm`. Verify the kubectl autocomplete works.
 
 ### User scripts and motd
