@@ -14,12 +14,16 @@ set -e
 #   - 19.03.7 
 #   - 18.09.3
 #
-# Kubernetes 1.14 and 1.15 support docker up to 18.09 
-# only. So we use that by default, and leave 
-# KUBE_VERSION undefined so it takes whatever is latest
 #########################################################
-DOCKER_VERSION=${DOCKER_VERSION:-18.09.3}
 
+# Kubernetes 1.15 supports docker up to 18.09 only
+case ${KUBE_VERSION} in 
+    1.15*)
+        DOCKER_VERSION=18.09.3
+        ;;
+esac
+
+# Run with root permissions only
 if [ $(id -ur) -ne 0 ]; then
     echo $0 can only be run as root. Use sudo.
     exit 1

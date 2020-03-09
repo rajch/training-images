@@ -5,16 +5,12 @@ Debian version 10.0 with:
   - Stock netinst setup 
   - SSH server only
   - Swap off
-  - vim, curl
-  - nano
-  - docker 19.03.7-ce
+  - docker
   - kubelet, kubeadm, kubectl
-
 
 ## Instructions
 
-## For debian base 10.0 
-### Base Setup
+### OS Setup
 1. Download **debian-9.9.0-amd64-netinst.iso** (Debian "stable" release) from https://www.debian.org/CD/http-ftp/. 
 2. Create a virtual machine with at least 2 cores, 2GB RAM, 8MB video memory and 100GB hard disk. Mount the iso from step 1 on the CDROM device. Boot. From the installer, choose "Install".
 3. In the "Set up users and passwords" step, provide a password for the root user, and create a user with "Full Name": User 1 and username: user1.
@@ -44,23 +40,20 @@ update-alternatives --set arptables /usr/sbin/arptables-legacy
 update-alternatives --set ebtables /usr/sbin/ebtables-legacy
 ```
 ### Copy Scripts
-Copy the attached **user1/rw-installscripts** directory to **/home/user1/rw-installscripts** as user1. Go to that directory and run `chmod +x *.sh`.
+16. Copy the attached **user1/rw-installscripts** directory to **/home/user1/rw-installscripts** as user1. Go to that directory and run `chmod +x *.sh`. If copied from Windows, change to Unix line ending by running `sed "s/\r$//" *.sh`.
 
 ### Docker and Kubernetes
-19. Run `sudo ./base-setup.sh` to install latest kubernetes and supported docker. Run `sudo KUBE_VERSION=<version> ./base-setup.sh` to install earlier supported versions. Currently suppported versions are:
+17. Run `sudo ./base-setup.sh` to install latest kubernetes and supported docker. Run `sudo KUBE_VERSION=<version> ./base-setup.sh` to install earlier supported versions. Currently suppported versions are:
     - 1.17.0-00
     - 1.16.0-00
     - 1.15.4-00    
-20. Verify that docker is up by running `docker system info`. Verify that kubeadm is installed by running `kubeadm`. Verify the kubectl autocomplete works.
+18. Verify that docker is up by running `docker system info`. Verify that kubeadm is installed by running `kubeadm`. Verify the kubectl autocomplete works.
 
-### User scripts and motd
-22. Copy the attached **user1/rw-installscripts** directory to **/home/user1/rw-installscripts** as user1. Go to that directory and run `chmod +x *.sh`.
-23. Optionally, copy the attached **/etc/motd** to **/etc/motd** as root.
+### (Optional) motd
+19. Optionally, copy the attached **/etc/motd** to **/etc/motd** as root.
 
 ### For compacting the VM
-15. Run `dd if=/dev/zero of=zerofillfile bs=1G`
-16. Run `rm zerofillfile`. 
-17. Run `poweroff`.
-18. On the host, run `VBoxManage modifyhd --compact "[drive]:\[path_to_image_file]\[name_of_image_file].vdi"`.
-
-
+20. Run `dd if=/dev/zero of=zerofillfile bs=1G`
+21. Run `rm zerofillfile`. 
+22. Run `poweroff`.
+23. On the host, run `VBoxManage modifyhd --compact "[drive]:\[path_to_image_file]\[name_of_image_file].vdi"`.
