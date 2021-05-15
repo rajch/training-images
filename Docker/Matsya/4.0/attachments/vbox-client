@@ -1,0 +1,21 @@
+#!/sbin/openrc-run
+# $Id$
+
+description="VirtualBox Guest GUI Integration Service"
+
+depend() {
+        need virtualbox-guest-additions
+}
+
+start() {
+        ebegin "Starting VirtualBox Guest GUI Integration Service"
+        /usr/sbin/VBoxClient --draganddrop
+        /usr/sbin/VBoxClient --vmsvga
+        eend $?
+}
+
+stop() {
+        ebegin "Stopping VirtualBox Guest GUI Integration Service"
+        killall VBoxClient
+        eend $?
+}
